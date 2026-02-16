@@ -150,16 +150,9 @@ Development process:
 ## 🖥 Installation (Local Development)
 
 1️⃣ Clone repository
-
 2️⃣ Install dependencies
-
-
 3️⃣ Create `.env` file
-
-
 4️⃣ Start MongoDB locally
-
-
 5️⃣ Run application
 
 
