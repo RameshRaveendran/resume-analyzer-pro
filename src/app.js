@@ -9,6 +9,7 @@ connectDB();
 // local requires
 const authRoutes = require("./routes/auth.routes");
 const protect = require("./middleware/auth.middleware");
+const resumeRoutes = require("./routes/resume.routes");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.set("views", "./src/views");
 
 // routes 
 app.use("/", authRoutes);
+app.use("/", resumeRoutes);
 
 
 // Test Route
