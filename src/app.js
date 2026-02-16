@@ -8,6 +8,7 @@ connectDB();
 
 // local requires
 const authRoutes = require("./routes/auth.routes");
+const Resume = require("./models/Resume");
 const protect = require("./middleware/auth.middleware");
 const resumeRoutes = require("./routes/resume.routes");
 
@@ -37,8 +38,10 @@ app.get("/", (req, res) => {
   res.render("landing");
 });
 
-app.get("/dashboard", protect, (req, res) => {
-  res.render("dashboard");
+app.get("/dashboard", protect, async (req, res) => {
+  const resumes = await Resume.find({ user: req.user.id }).sort({ createdAt: -1 });
+
+  res.render("dashboard", { resumes });
 });
 
 const PORT = process.env.PORT || 5000;

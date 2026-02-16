@@ -5,4 +5,19 @@
   <button type="submit">Upload Resume</button>
 </form>
 
+<h3>Your Uploaded Resumes</h3>
+
+<ul>
+  <% if (resumes.length === 0) { %>
+    <p>No resumes uploaded yet.</p>
+  <% } %>
+
+  <% resumes.forEach(resume => { %>
+    <li>
+      <strong><%= resume.fileName %></strong>
+      (Uploaded on <%= resume.createdAt.toDateString() %>)
+    </li>
+  <% }) %>
+</ul>
+
 <a href="/logout">Logout</a>

@@ -1,4 +1,5 @@
 const Resume = require("../models/Resume");
+const parsePDF = require("../utils/pdfParser");
 
 exports.uploadResume = async (req, res) => {
   try {
@@ -6,14 +7,18 @@ exports.uploadResume = async (req, res) => {
       return res.send("No file uploaded");
     }
 
+    const extractedText = await parsePDF(req.file.path);
+
     await Resume.create({
       user: req.user.id,
       fileName: req.file.filename,
       filePath: req.file.path,
+      rawText: extractedText,
     });
 
     res.redirect("/dashboard");
   } catch (error) {
+    console.error(error);
     res.send("Upload failed");
   }
 };
