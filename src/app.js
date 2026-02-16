@@ -6,20 +6,36 @@ const cookieParser = require("cookie-parser");
 dotenv.config();
 connectDB();
 
+// local requires
+const authRoutes = require("./routes/auth.routes");
+const protect = require("./middleware/auth.middleware");
+
 const app = express();
+
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+
+
+
 // View Engine
 app.set("view engine", "ejs");
 app.set("views", "./src/views");
 
+// routes 
+app.use("/", authRoutes);
+
+
 // Test Route
 app.get("/", (req, res) => {
   res.render("landing");
+});
+
+app.get("/dashboard", protect, (req, res) => {
+  res.render("dashboard");
 });
 
 const PORT = process.env.PORT || 5000;
