@@ -8,9 +8,10 @@ connectDB();
 
 // local requires
 const authRoutes = require("./routes/auth.routes");
-const Resume = require("./models/Resume");
+const Resume = require("./models/resume");
 const protect = require("./middleware/auth.middleware");
 const resumeRoutes = require("./routes/resume.routes");
+const Analysis = require("./models/analysisModel");
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.set("views", "./src/views");
 // routes 
 app.use("/", authRoutes);
 app.use("/", resumeRoutes);
-
+app.use("/", require("./routes/analysisRoutes"));
 
 // Test Route
 app.get("/", (req, res) => {
@@ -39,9 +40,29 @@ app.get("/", (req, res) => {
 });
 
 app.get("/dashboard", protect, async (req, res) => {
-  const resumes = await Resume.find({ user: req.user.id }).sort({ createdAt: -1 });
+  try {
+    const resumes = await Resume.find({ user: req.user.id })
+      .sort({ createdAt: -1 });
 
-  res.render("dashboard", { resumes });
+    const analyses = await Analysis.find({ user: req.user.id });
+
+    const resumeWithAnalysis = resumes.map(resume => {
+      const analysis = analyses.find(
+        a => a.resume.toString() === resume._id.toString()
+      );
+
+      return {
+        ...resume.toObject(),
+        analysis: analysis || null,
+      };
+    });
+
+    res.render("dashboard", { resumes: resumeWithAnalysis });
+
+  } catch (error) {
+    console.error(error);
+    res.send("Dashboard error");
+  }
 });
 
 const PORT = process.env.PORT || 5000;

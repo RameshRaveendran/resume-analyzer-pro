@@ -13,9 +13,43 @@
   <% } %>
 
   <% resumes.forEach(resume => { %>
-    <li>
+    <li style="margin-bottom: 25px; border: 1px solid #ccc; padding: 15px;">
+      
       <strong><%= resume.fileName %></strong>
       (Uploaded on <%= resume.createdAt.toDateString() %>)
+
+      <br><br>
+
+      <% if (!resume.analysis) { %>
+
+        <form action="/analyze/<%= resume._id %>" method="POST">
+          <button type="submit">Analyze</button>
+        </form>
+
+      <% } else { %>
+
+        <h4>ATS Score: <%= resume.analysis.score %> / 100</h4>
+
+        <div style="background:#eee; height:20px; width:300px; border-radius:5px;">
+          <div style="
+            height:20px;
+            width:<%= resume.analysis.score %>%;
+            background:<%= resume.analysis.score > 70 ? 'green' : 'orange' %>;
+            border-radius:5px;">
+          </div>
+        </div>
+
+        <br>
+
+        <p><strong>Extracted Skills:</strong></p>
+        <ul>
+          <% resume.analysis.extractedSkills.forEach(skill => { %>
+            <li style="color:green;"><%= skill %></li>
+          <% }) %>
+        </ul>
+
+      <% } %>
+
     </li>
   <% }) %>
 </ul>
