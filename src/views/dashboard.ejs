@@ -1,57 +1,132 @@
-<h2>Dashboard</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Resume Analyzer Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .stat-card { transition: transform 0.2s; }
+        .stat-card:hover { transform: translateY(-4px); }
+    </style>
+</head>
+<body class="min-h-screen">
 
-<form action="/upload" method="POST" enctype="multipart/form-data">
-  <input type="file" name="resume" accept=".pdf" required />
-  <button type="submit">Upload Resume</button>
-</form>
+    <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center space-x-2">
+            <div class="bg-indigo-600 p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+            </div>
+            <span class="text-xl font-bold text-slate-900">Analyzer<span class="text-indigo-600">Pro</span></span>
+        </div>
+        
+        <div class="flex items-center space-x-6">
+            <span class="text-sm text-slate-500 font-medium hidden md:block">Welcome back, User</span>
+            <a href="/logout" class="flex items-center space-x-2 text-sm font-semibold text-red-500 hover:text-red-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
 
-<h3>Your Uploaded Resumes</h3>
+    <main class="max-w-6xl mx-auto p-6 md:p-10">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900">Your Dashboard</h1>
+                <p class="text-slate-500">Upload and manage your resumes for AI analysis.</p>
 
-<ul>
-  <% if (resumes.length === 0) { %>
-    <p>No resumes uploaded yet.</p>
-  <% } %>
+            </div>
+                          <p class="text-slate-500" style="color: rgb(251, 6, 6);">Maximum size 5MB</p>
+            <form action="/upload" method="POST" enctype="multipart/form-data" class="flex items-center bg-white p-2 rounded-2xl shadow-sm border border-slate-200">
+              <input type="file" name="resume" accept=".pdf" required 
+              class="text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"/>
+                <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-xl font-bold text-sm hover:bg-indigo-700 transition-all">
+                    Upload
+                </button>
 
-  <% resumes.forEach(resume => { %>
-    <li style="margin-bottom: 25px; border: 1px solid #ccc; padding: 15px;">
-      
-      <strong><%= resume.fileName %></strong>
-      (Uploaded on <%= resume.createdAt.toDateString() %>)
+            </form>
 
-      <br><br>
 
-      <% if (!resume.analysis) { %>
-
-        <form action="/analyze/<%= resume._id %>" method="POST">
-          <button type="submit">Analyze</button>
-        </form>
-
-      <% } else { %>
-
-        <h4>ATS Score: <%= resume.analysis.score %> / 100</h4>
-
-        <div style="background:#eee; height:20px; width:300px; border-radius:5px;">
-          <div style="
-            height:20px;
-            width:<%= resume.analysis.score %>%;
-            background:<%= resume.analysis.score > 70 ? 'green' : 'orange' %>;
-            border-radius:5px;">
-          </div>
         </div>
 
-        <br>
+        <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            Recent Uploads
+        </h3>
 
-        <p><strong>Extracted Skills:</strong></p>
-        <ul>
-          <% resume.analysis.extractedSkills.forEach(skill => { %>
-            <li style="color:green;"><%= skill %></li>
-          <% }) %>
-        </ul>
+        <% if (resumes.length === 0) { %>
+            <div class="bg-white border-2 border-dashed border-slate-200 rounded-3xl p-20 text-center">
+                <p class="text-slate-400 font-medium">No resumes found. Start by uploading your first PDF.</p>
+            </div>
+        <% } %>
 
-      <% } %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% resumes.forEach(resume => { %>
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 stat-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-slate-50 rounded-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 px-2 py-1 rounded-md">
+                            <%= resume.createdAt.toDateString() %>
+                        </span>
+                    </div>
 
-    </li>
-  <% }) %>
-</ul>
+                    <h4 class="font-bold text-slate-800 truncate mb-1" title="<%= resume.fileName %>">
+                        <%= resume.fileName %>
+                    </h4>
 
-<a href="/logout">Logout</a>
+                    <div class="mt-6">
+                        <% if (!resume.analysis) { %>
+                            <form action="/analyze/<%= resume._id %>" method="POST">
+                                <button type="submit" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-slate-800 transition-all flex items-center justify-center space-x-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    </svg>
+                                    <span>Run AI Analysis</span>
+                                </button>
+                            </form>
+                        <% } else { %>
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-sm font-bold text-slate-600">ATS Match Score</span>
+                                <span class="text-2xl font-black <%= resume.analysis.score > 70 ? 'text-green-500' : 'text-orange-500' %>">
+                                    <%= resume.analysis.score %>%
+                                </span>
+                            </div>
+                            
+                            <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden mb-6">
+                                <div class="h-full transition-all duration-1000 <%= resume.analysis.score > 70 ? 'bg-green-500' : 'bg-orange-500' %>" 
+                                     style="width: <%= resume.analysis.score %>%"></div>
+                            </div>
+
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Key Skills Found</p>
+                            <div class="flex flex-wrap gap-2">
+                                <% resume.analysis.extractedSkills.slice(0, 5).forEach(skill => { %>
+                                    <span class="text-[11px] font-bold bg-indigo-50 text-indigo-600 px-3 py-1 rounded-lg border border-indigo-100">
+                                        <%= skill %>
+                                    </span>
+                                <% }) %>
+                                <% if(resume.analysis.extractedSkills.length > 5) { %>
+                                    <span class="text-[11px] font-bold text-slate-400 py-1">+<%= resume.analysis.extractedSkills.length - 5 %> more</span>
+                                <% } %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+
+</body>
+</html>

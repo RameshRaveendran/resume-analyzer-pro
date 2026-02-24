@@ -1,7 +1,90 @@
-<h2>Register</h2>
-<form action="/register" method="POST">
-  <input type="text" name="name" placeholder="Name" required />
-  <input type="email" name="email" placeholder="Email" required />
-  <input type="password" name="password" placeholder="Password" required />
-  <button type="submit">Register</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Resume Analyzer Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white w-full max-w-[900px] rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+        
+        <div class="gradient-bg md:w-5/12 p-10 text-white flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Join the Pro's.</h2>
+                <p class="text-indigo-100 leading-relaxed">Create an account to start optimizing your resume with our AI-driven analysis engine.</p>
+            </div>
+            
+            <div class="hidden md:block">
+                <div class="flex items-center space-x-2 text-sm text-indigo-200">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span>System Online - AI Ready</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:w-7/12 p-8 md:p-12">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold text-slate-900">Get Started</h1>
+                <p class="text-slate-500">It only takes a minute to set up your profile.</p>
+            </div>
+
+            <form action="/register" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Full Name</label>
+                    <input type="text" name="name" 
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400"
+                           placeholder="John Doe" required />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
+                    <input type="email" name="email" 
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400"
+                           placeholder="john@example.com" required />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Password</label>
+                    <input type="password" name="password" 
+                           class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400"
+                           placeholder="Min. 8 characters" required />
+                </div>
+
+                <div class="flex items-start py-2">
+                    <input type="checkbox" id="terms" class="mt-1 w-4 h-4 text-indigo-600 border-slate-300 rounded focus:ring-indigo-500" required>
+                    <label for="terms" class="ml-2 text-xs text-slate-500 leading-relaxed">
+                        I agree to the <a href="#" class="text-indigo-600 underline">Terms of Service</a> and <a href="#" class="text-indigo-600 underline">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <button type="submit" 
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-indigo-100 active:scale-[0.98]">
+                    Create My Account
+                </button>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p class="text-sm text-slate-600">
+                    Already have an account? 
+                    <a href="/login" class="font-bold text-indigo-600 hover:text-indigo-500">Log In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
