@@ -1,4 +1,4 @@
-const Resume = require("../models/Resume");
+const Resume = require("../models/resume");
 const parsePDF = require("../utils/pdfParser");
 
 exports.uploadResume = async (req, res) => {
