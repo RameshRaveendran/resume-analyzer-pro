@@ -1,16 +1,16 @@
 🚀 Resume Analyzer Pro
 
-A SaaS-style Resume Analysis Platform built with Node.js, Express, MongoDB, and EJS.
+A SaaS-style Resume Analysis Platform built using Node.js, Express, MongoDB, and EJS.
 
-This project simulates a real-world production-grade backend system including authentication, file processing, skill extraction, ATS scoring, and modular architecture designed for future AI integration.
+This project simulates a real-world, production-grade backend system including authentication, resume parsing, ATS scoring, modular architecture, and future AI integration support.
 
 🧠 Project Overview
 
 Resume Analyzer Pro allows users to:
 
-Register & Login securely
+Securely register and login
 
-Upload resume files (PDF)
+Upload resume files (PDF only)
 
 Store resume history per user
 
@@ -22,7 +22,7 @@ Calculate ATS-style resume score
 
 Visualize analysis results on dashboard
 
-The system is built using scalable backend architecture and professional Git workflow practices.
+Built using scalable backend architecture and professional Git workflow practices.
 
 🏗 System Architecture
 Client (Browser)
@@ -34,21 +34,19 @@ Controllers
 Models
       ↓
 MongoDB
-Authentication Layer
 
-JWT (JSON Web Token) stored in HTTP-only cookies
+Authentication Layer:
+JWT → HTTP-only Cookies
 
-File Processing Pipeline
-
+File Processing Pipeline:
 Multer → PDF Upload → pdf-parse → Text Extraction → Skill Engine → ATS Scoring
-
 🛠 Tech Stack
 
 Node.js
 
 Express.js
 
-MongoDB (Local → Future: Atlas)
+MongoDB (Local → Future: MongoDB Atlas)
 
 Mongoose
 
@@ -56,61 +54,79 @@ EJS
 
 JWT Authentication
 
-bcrypt Password Hashing
+bcrypt (Password Hashing)
 
-Multer (File Upload)
+Multer (File Upload Handling)
 
 pdf-parse (PDF Text Extraction)
 
 🔐 Authentication System (Completed)
 
 ✔ User Registration
+
 ✔ Password Hashing using bcrypt
+
 ✔ JWT-based Login
+
 ✔ HTTP-only Cookie Storage
+
 ✔ Protected Routes Middleware
-✔ Logout functionality
+
+✔ Logout Functionality
 
 Simulates a real SaaS authentication flow.
 
 📂 Resume Upload & Parsing System (Completed)
 
 ✔ PDF-only upload validation
+
 ✔ Unique filename storage
+
 ✔ Resume linked to user (ObjectId reference)
+
 ✔ Resume history stored in database
+
 ✔ Dashboard display per user
+
 ✔ PDF text extraction using pdf-parse
+
 ✔ Raw resume text stored in MongoDB
 
 📊 Resume Analysis Engine (Completed)
 
 ✔ Skill extraction engine
+
 ✔ Keyword matching algorithm
+
 ✔ Static skill database
+
 ✔ ATS-style scoring logic
+
 ✔ Score calculation (skill coverage + density + length quality)
+
 ✔ Dashboard integration
+
 ✔ Visual ATS progress bar
+
 ✔ Automatic analysis update (no duplicate records)
 
 This simulates a lightweight production ATS system.
 
 🧮 ATS Scoring Logic
 
-Scoring is calculated using:
+Score Calculation Weights:
 
-Skill Coverage Weight (50%)
+Skill Coverage Weight → 50%
 
-Keyword Density Score (30%)
+Keyword Density Score → 30%
 
-Resume Length Quality Score (20%)
+Resume Length Quality Score → 20%
 
 Final score normalized to 100.
 
 🌿 Git Workflow Strategy
 
-We follow professional branching:
+Professional branching model:
 
 main → Production-ready stable branch
 
@@ -118,9 +134,9 @@ dev → Integration branch
 
 feature/* → Feature development branches
 
-Development Process:
+Development Process
 
-Build feature inside feature branch
+Build feature inside feature/*
 
 Merge feature → dev
 
@@ -128,19 +144,22 @@ Test thoroughly
 
 Merge dev → main
 
-Deploy main
+Deploy from main
 
 🖥 Installation (Local Development)
-1️⃣ Clone repository
+1️⃣ Clone Repository
 git clone <repository-url>
-2️⃣ Install dependencies
+2️⃣ Install Dependencies
 npm install
-3️⃣ Create .env file
+3️⃣ Create .env File
 PORT=5000
 MONGO_URI=your_local_mongodb_uri
 JWT_SECRET=your_secret_key
-4️⃣ Start MongoDB locally
-5️⃣ Run application
+4️⃣ Start MongoDB Locally
+
+Make sure MongoDB service is running.
+
+5️⃣ Run Application
 npm run dev
 
 Visit:
@@ -148,9 +167,11 @@ Visit:
 http://localhost:5000
 🌍 Deployment Plan
 
-Target: Render
-Database: MongoDB Atlas
-Environment variables configured via hosting dashboard.
+Hosting Platform → Render
+
+Database → MongoDB Atlas
+
+Environment variables configured via hosting dashboard
 
 🧠 Engineering Goals
 
@@ -193,11 +214,9 @@ Deployment pipeline automation
 👨‍💻 Development Status
 
 Current Stage:
-
 Core infrastructure + authentication + resume parsing + ATS scoring engine complete.
 
 Next Stage:
-
 Advanced job description matching & intelligent analysis expansion.
 
 📜 License
