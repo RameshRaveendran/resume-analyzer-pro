@@ -1,209 +1,205 @@
-# 🚀 Resume Analyzer Pro
+🚀 Resume Analyzer Pro
 
-A SaaS-style Resume Analyzer web application built with Node.js, Express, MongoDB, and EJS.
+A SaaS-style Resume Analysis Platform built with Node.js, Express, MongoDB, and EJS.
 
-This project simulates a real-world production system with authentication, file uploads, resume parsing, and modular architecture designed for future AI integration.
+This project simulates a real-world production-grade backend system including authentication, file processing, skill extraction, ATS scoring, and modular architecture designed for future AI integration.
 
----
-
-## 🧠 Project Overview
+🧠 Project Overview
 
 Resume Analyzer Pro allows users to:
 
-- Register & Login securely
-- Upload resume files (PDF)
-- Store resume history per user
-- Extract raw text from resumes
-- View dashboard with uploaded resume records
+Register & Login securely
 
-The system is built using a scalable backend architecture and professional Git workflow.
+Upload resume files (PDF)
 
----
+Store resume history per user
 
-## 🏗 Architecture
+Extract raw text from resumes
 
+Automatically detect technical skills
+
+Calculate ATS-style resume score
+
+Visualize analysis results on dashboard
+
+The system is built using scalable backend architecture and professional Git workflow practices.
+
+🏗 System Architecture
 Client (Browser)
-↓
+      ↓
 Express Server
-↓
+      ↓
 Controllers
-↓
+      ↓
 Models
-↓
+      ↓
 MongoDB
+Authentication Layer
 
-Authentication Layer:
 JWT (JSON Web Token) stored in HTTP-only cookies
 
-File Handling:
-Multer → PDF Upload → pdf-parse → Text Extraction
+File Processing Pipeline
 
----
+Multer → PDF Upload → pdf-parse → Text Extraction → Skill Engine → ATS Scoring
 
-## 🛠 Tech Stack
+🛠 Tech Stack
 
-- Node.js
-- Express.js
-- MongoDB (Local → Future: Atlas)
-- Mongoose
-- EJS
-- JWT Authentication
-- bcrypt Password Hashing
-- Multer (File Upload)
-- pdf-parse (PDF Text Extraction)
+Node.js
 
----
+Express.js
 
-## 🔐 Authentication System (Completed)
+MongoDB (Local → Future: Atlas)
 
-✔ User Registration  
-✔ Password Hashing using bcrypt  
-✔ JWT-based Login  
-✔ HTTP-only Cookie Storage  
-✔ Protected Routes Middleware  
-✔ Logout functionality  
+Mongoose
 
-This simulates a real SaaS authentication flow.
+EJS
 
----
+JWT Authentication
 
-## 📂 Resume Upload System (Completed)
+bcrypt Password Hashing
 
-✔ PDF-only upload validation  
-✔ Unique filename storage  
-✔ Resume linked to user (ObjectId reference)  
-✔ Resume history stored in database  
-✔ Dashboard shows user's uploaded resumes  
-✔ PDF text extraction using pdf-parse  
-✔ Raw resume text stored in MongoDB  
+Multer (File Upload)
 
----
+pdf-parse (PDF Text Extraction)
 
-## 📊 Current Features Completed
+🔐 Authentication System (Completed)
 
-### ✅ Foundation
-- Professional folder structure
-- Environment variable management
-- MongoDB local development setup
-- Git branch workflow (main / dev / feature branches)
+✔ User Registration
+✔ Password Hashing using bcrypt
+✔ JWT-based Login
+✔ HTTP-only Cookie Storage
+✔ Protected Routes Middleware
+✔ Logout functionality
 
-### ✅ Authentication Module
-- Secure password hashing
-- JWT token generation
-- Cookie-based auth
-- Middleware route protection
+Simulates a real SaaS authentication flow.
 
-### ✅ Resume Management Module
-- File upload handling
-- User-resume relationship
-- Resume history dashboard
-- PDF text extraction engine
+📂 Resume Upload & Parsing System (Completed)
 
----
+✔ PDF-only upload validation
+✔ Unique filename storage
+✔ Resume linked to user (ObjectId reference)
+✔ Resume history stored in database
+✔ Dashboard display per user
+✔ PDF text extraction using pdf-parse
+✔ Raw resume text stored in MongoDB
 
-## 🚧 Current Development Branch
+📊 Resume Analysis Engine (Completed)
 
-Working branch:
+✔ Skill extraction engine
+✔ Keyword matching algorithm
+✔ Static skill database
+✔ ATS-style scoring logic
+✔ Score calculation (skill coverage + density + length quality)
+✔ Dashboard integration
+✔ Visual ATS progress bar
+✔ Automatic analysis update (no duplicate records)
 
-This branch will implement:
+This simulates a lightweight production ATS system.
 
-- Skill extraction engine
-- Keyword matching
-- ATS scoring logic
-- Resume scoring system
-- Result visualization
+🧮 ATS Scoring Logic
 
----
+Scoring is calculated using:
 
-## 🎯 Upcoming Features (In Progress)
+Skill Coverage Weight (50%)
 
-🔲 Skill Extraction Engine  
-🔲 Keyword Matching Algorithm  
-🔲 Resume Score Calculation  
-🔲 ATS Compliance Check  
-🔲 Resume Analysis Result Page  
-🔲 Job Description Matching  
-🔲 Professional UI Styling  
-🔲 Deployment on Render  
-🔲 MongoDB Atlas Production Database  
+Keyword Density Score (30%)
 
----
+Resume Length Quality Score (20%)
 
-## 🌿 Git Workflow Strategy
+Final score normalized to 100.
+
+🌿 Git Workflow Strategy
 
 We follow professional branching:
 
-main → Production-ready stable branch  
-dev → Integration branch  
-feature/* → Feature development branches  
+main → Production-ready stable branch
 
-Development process:
+dev → Integration branch
 
-1. Build feature inside feature branch
-2. Merge feature → dev
-3. Test thoroughly
-4. Merge dev → main
-5. Deploy main
+feature/* → Feature development branches
 
----
+Development Process:
 
-## 🖥 Installation (Local Development)
+Build feature inside feature branch
 
+Merge feature → dev
+
+Test thoroughly
+
+Merge dev → main
+
+Deploy main
+
+🖥 Installation (Local Development)
 1️⃣ Clone repository
+git clone <repository-url>
 2️⃣ Install dependencies
-3️⃣ Create `.env` file
+npm install
+3️⃣ Create .env file
+PORT=5000
+MONGO_URI=your_local_mongodb_uri
+JWT_SECRET=your_secret_key
 4️⃣ Start MongoDB locally
 5️⃣ Run application
+npm run dev
 
+Visit:
 
----
+http://localhost:5000
+🌍 Deployment Plan
 
-## 🌍 Deployment Plan
+Target: Render
+Database: MongoDB Atlas
+Environment variables configured via hosting dashboard.
 
-Future deployment target: Render
+🧠 Engineering Goals
 
-Production Database: MongoDB Atlas
+This project demonstrates:
 
-Environment variables will be configured inside Render dashboard.
+Real-world backend architecture
 
----
+Authentication & security best practices
 
-## 🧠 Engineering Goals
+File handling & validation
 
-This project is designed to demonstrate:
+Data modeling with relationships
 
-- Real-world backend architecture
-- Authentication & security best practices
-- File handling & validation
-- Data modeling with relationships
-- Modular service design
-- Scalable upgrade path for AI integration
+Modular service design
 
----
+Resume parsing pipeline
 
-## 🚀 Future Enhancements
+Scoring engine logic
 
-- AI-based resume analysis
-- Semantic job matching
-- Embedding-based similarity scoring
-- Resume improvement suggestions
-- Admin dashboard
-- Resume report export (PDF)
-- Subscription model integration
+Production-style Git workflow
 
----
+🚀 Future Enhancements
 
-## 👨‍💻 Development Status
+Job description matching engine
 
-Current Stage:  
-Core infrastructure + authentication + resume parsing complete.
+Category-weighted skill scoring
 
-Next Stage:  
-Resume Analysis Engine implementation.
+Semantic AI-based resume analysis
 
----
+Resume improvement suggestions
 
-## 📜 License
+Resume export as PDF report
+
+Admin dashboard
+
+Subscription model integration
+
+Deployment pipeline automation
+
+👨‍💻 Development Status
+
+Current Stage:
+
+Core infrastructure + authentication + resume parsing + ATS scoring engine complete.
+
+Next Stage:
+
+Advanced job description matching & intelligent analysis expansion.
+
+📜 License
 
 This project is for educational and portfolio demonstration purposes.
-
