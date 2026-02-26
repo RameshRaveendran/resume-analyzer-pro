@@ -38,6 +38,9 @@ app.use("/", require("./routes/analysisRoutes"));
 app.get("/", (req, res) => {
   res.render("landing");
 });
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
 
 app.get("/dashboard", protect, async (req, res) => {
   try {
